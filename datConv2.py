@@ -2,8 +2,7 @@ import tkinter
 from tkinter import filedialog
 from matplotlib.figure import Figure
 import customtkinter as ctk
-from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, 
-NavigationToolbar2Tk)
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg)
 import matplotlib.pyplot as plt
 import numpy as np
 from tkinter.filedialog import askopenfilename
