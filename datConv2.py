@@ -14,7 +14,7 @@ class App(ctk.CTk):
     def __init__(self):
         super().__init__()
 
-        ctk.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
+        ctk.set_appearance_mode("Light")  # Modes: "System" (standard), "Dark", "Light"
         ctk.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
         self.geometry(f"{345}x{350}")
         self.resizable(0,0)
