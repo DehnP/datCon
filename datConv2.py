@@ -18,7 +18,7 @@ class App(ctk.CTk):
         ctk.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
         self.geometry(f"{345}x{350}")
         self.resizable(0,0)
-        self.title(".dat Converter 2")
+        self.title(".dat (REEE)Converter 2")
         self.view1()
 
     def view1(self):
