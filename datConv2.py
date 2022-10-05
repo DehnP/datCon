@@ -3,18 +3,17 @@ from tkinter import filedialog
 from matplotlib.figure import Figure
 import customtkinter as ctk
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg)
-import matplotlib.pyplot as plt
 import numpy as np
 from datfuncs2 import OpenTextFile, AddOnes, chordMult, prepend_line
 
-
+# TO DO ------->>> RESIZE WINDOW WHEN PLOTTING
 class App(ctk.CTk):
     def __init__(self):
         super().__init__()
 
-        ctk.set_appearance_mode("Light")  # Modes: "System" (standard), "Dark", "Light"
+        ctk.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
         ctk.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
-        self.geometry(f"{345}x{350}")
+        self.geometry(f"{345}x{360}")
         self.resizable(0,0)
         self.title(".dat Converter 2 (Updated v6)")
         self.view1()
@@ -88,7 +87,7 @@ class App(ctk.CTk):
         root = tkinter.Tk()
         root.withdraw() #use to hide tkinter window
         print("openfileexplorer")
-        tempdir = filedialog.askopenfilename(parent=root, title='Please select a file')
+        tempdir = filedialog.askopenfilename(parent=root, title='Please select a file',filetypes=[('Text file','.txt'),('.dat file','.dat')])
         if len(tempdir) > 0:
             self.File_Loc_Entry.delete(0,'end')
             self.File_Loc_Entry.insert(0, tempdir)
@@ -106,13 +105,14 @@ class App(ctk.CTk):
     def plotButton(self):
         if 'arr' in globals():
             self.view2
-            fig = Figure(figsize=(5,5),dpi=100)
+            fig = Figure(figsize=(3.25,1.5),dpi=100)
+            fig.set_facecolor('xkcd:black')
             x = arr[:,1]
             y = arr[:,2]
             plot1 = fig.add_subplot(111)
             plot1.plot(x,y)
-            canvas = FigureCanvasTkAgg(fig,self.f3)
-            canvas.get_tk_widget().pack()
+            canvas = FigureCanvasTkAgg(fig)
+            canvas.get_tk_widget().grid(row=1,column=0)
 
         else:
             print('Load a file first..')
@@ -127,8 +127,11 @@ class App(ctk.CTk):
             self.Save_Loc_Entry.insert(0, tempdir)
 
     def saveButton(self):
-        np.savetxt(self.Save_Loc_Entry.get()+'\\'+self.File_Name_Entry.get()+'.txt',arr,fmt='%1.6f',delimiter='  ')
-        var = prepend_line(self.Save_Loc_Entry.get()+'\\'+self.File_Name_Entry.get()+'.txt','Polyline=true')
+        if len(self.Save_Loc_Entry.get()) > 0:
+            np.savetxt(self.Save_Loc_Entry.get()+'\\'+self.File_Name_Entry.get()+'.txt',arr,fmt='%1.6f',delimiter='  ')
+            var = prepend_line(self.Save_Loc_Entry.get()+'\\'+self.File_Name_Entry.get()+'.txt','Polyline=true')
+        else:
+            print('')
 
 
     def quitProgram(self):
