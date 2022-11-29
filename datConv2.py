@@ -86,7 +86,6 @@ class App(ctk.CTk):
     def openFile(self):
         root = tkinter.Tk()
         root.withdraw() #use to hide tkinter window
-        print("openfileexplorer")
         tempdir = filedialog.askopenfilename(parent=root, title='Please select a file',filetypes=[('Text file','.txt'),('.dat file','.dat')])
         if len(tempdir) > 0:
             self.File_Loc_Entry.delete(0,'end')
@@ -118,7 +117,6 @@ class App(ctk.CTk):
             print('Load a file first..')
 
     def saveFile(self):
-        print("savefolderexplorer")
         root = tkinter.Tk()
         root.withdraw() #use to hide tkinter window
         tempdir = filedialog.askdirectory(parent=root, title='Please select a folder')
