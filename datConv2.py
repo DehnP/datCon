@@ -5,6 +5,7 @@ import customtkinter as ctk
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg)
 import numpy as np
 from datfuncs2 import OpenTextFile, AddOnes, chordMult, prepend_line
+from PIL import Image
 
 # TO DO ------->>> RESIZE WINDOW WHEN PLOTTING
 class App(ctk.CTk):
@@ -27,14 +28,14 @@ class App(ctk.CTk):
         self.f2.grid(row=2,column=0,pady=10,padx=10)
 
         #==========FRAME 1===========
-        photo = tkinter.PhotoImage(file = "D:\PythonPlayground\datConverter2\Assets\Folder.png")
+        self.folder_icon = ctk.CTkImage(light_image=Image.open("Assets/Folder.png"))
         self.File_Loc_Label = ctk.CTkLabel(self.f1,text='File Location')
         self.File_Loc_Label.grid(row=0,column=0,columnspan=3,sticky='nsew',pady=2)
 
-        self.File_Loc_Entry = ctk.CTkEntry(self.f1,placeholder_text='D:\\..',width=300)
+        self.File_Loc_Entry = ctk.CTkEntry(self.f1,placeholder_text='C:\\..',width=300)
         self.File_Loc_Entry.grid(row=1,column=0,sticky='nsew',pady=2,columnspan=2)
 
-        self.File_Loc_Open = ctk.CTkButton(self.f1,text='',width=20,image=photo,command=self.openFile)
+        self.File_Loc_Open = ctk.CTkButton(self.f1,text='',width=20,image=self.folder_icon,command=self.openFile)
         self.File_Loc_Open.grid(row=1,column=2,sticky='nsew',pady=2)
 
         self.Chord_Label = ctk.CTkLabel(self.f1,text='Chord Length')
@@ -58,7 +59,7 @@ class App(ctk.CTk):
         self.Save_Loc_Entry = ctk.CTkEntry(self.f2,placeholder_text='D:\\..',width=300)
         self.Save_Loc_Entry.grid(row=1,column=0,sticky='nsew',pady=2,columnspan=2)
 
-        self.Save_Loc_Open = ctk.CTkButton(self.f2,text='',width=20,image=photo,command=self.saveFile)
+        self.Save_Loc_Open = ctk.CTkButton(self.f2,text='',width=20,image=self.folder_icon,command=self.saveFile)
         self.Save_Loc_Open.grid(row=1,column=3,sticky='nsew',pady=2) 
 
         self.File_Name_Label = ctk.CTkLabel(self.f2,text='File Name')
