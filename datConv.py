@@ -13,10 +13,11 @@ class App(ctk.CTk):
         super().__init__()
 
         # set appearance mode and default color theme
-        ctk.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
+        ctk.set_appearance_mode("Light")  # Modes: "System" (standard), "Dark", "Light"
         ctk.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
         self.resizable(0,0)
-        self.title(".dat Converter 2 (Updated v6)")
+        self.title("datConv")
+        self.iconbitmap("Assets/datCon.ico")
         # initialize the window
         self.view1()
 
@@ -77,18 +78,20 @@ class App(ctk.CTk):
         self.quitButton = ctk.CTkButton(self.f2,text='Quit',command = self.quitProgram)
         self.quitButton.grid(row=4,column=1,columnspan=3,sticky='nsew',pady=5)
 
-
+    #==========FUNCTIONS===========
+    #==========PLOTVIEW===========
     def view2(view1):
         view1.f3 = tkinter.Frame(view1)
         view1.f3.grid(row=1,column=0)
 
-        view1.label = ctk.CTkLabel(view1.f3,text='REEEEEEEE',width=310,height=120)
+        view1.label = ctk.CTkLabel(view1.f3,text='!!PLACEHOLDER!!',width=310,height=120)
         view1.label.pack(pady=10,padx=10)
 
     def openFile(self):
         root = tkinter.Tk()
         root.withdraw() #use to hide tkinter window
         tempdir = filedialog.askopenfilename(parent=root, title='Please select a file',filetypes=[('Text file','.txt'),('.dat file','.dat')])
+        # Insert file path into entry box
         if len(tempdir) > 0:
             self.File_Loc_Entry.delete(0,'end')
             self.File_Loc_Entry.insert(0, tempdir)
@@ -101,7 +104,7 @@ class App(ctk.CTk):
             global arr
             arr = array
         else:
-            print('Enter a chord length & file path, idiot.')
+            print('Enter a chord length & file path')
 
     def plotButton(self):
         if 'arr' in globals():
@@ -128,8 +131,28 @@ class App(ctk.CTk):
 
     def saveButton(self):
         if len(self.Save_Loc_Entry.get()) > 0:
-            np.savetxt(self.Save_Loc_Entry.get()+'\\'+self.File_Name_Entry.get()+'.txt',arr,fmt='%1.6f',delimiter='  ')
-            var = prepend_line(self.Save_Loc_Entry.get()+'\\'+self.File_Name_Entry.get()+'.txt','Polyline=true')
+            np.savetxt(self.Save_Loc_Entry.get()+'\\'+self.File_Name_Entry.get()+'.txt',arr,fmt='%1.6f',delimiter=',')
+            var = prepend_line(self.Save_Loc_Entry.get()+'\\'+self.File_Name_Entry.get()+'.txt','polyline=true')
+
+            #========JANK CODE TO REMOVE .000000 FROM END OF EACH LINE========
+            # Specify the string to be deleted and the file path
+            string_to_delete = ".000000"
+            file_path = (self.Save_Loc_Entry.get()+'\\'+self.File_Name_Entry.get()+'.txt')
+
+            # Open the file in read mode and read the contents into a string
+            with open(file_path, "r") as f:
+                contents = f.read()
+
+            # Replace all instances of the string with an empty string
+            modified_contents = contents.replace(string_to_delete, "")
+
+            # Open the file in write mode and write the modified string to the file
+            with open(file_path, "w") as f:
+                f.write(modified_contents)
+
+            # Close the file
+            f.close()
+            
         else:
             print('')
 

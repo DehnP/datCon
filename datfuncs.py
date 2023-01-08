@@ -2,19 +2,41 @@ import numpy as np
 import os
 
 #==========Strip txt to array & Remove first line=========#
+# def OpenTextFile(datPath):
+#     array = []
+
+#     with open (datPath) as textFile:
+#         lines = textFile.readlines()
+#     del lines[0]
+#     new_file = open(datPath,"w+")
+#     for line in lines:
+#         new_file.write(line)
+#     new_file.close()
+
+#     with open (datPath) as textFile:
+#         for line in textFile:
+#             array1 = [item.strip() for item in line.split()]
+#             array.append(array1)            
+#     return array
+
+#==========Strip txt to array=========#
 def OpenTextFile(datPath):
     array = []
 
-    with open (datPath) as textFile:
+    # Create a dummy file by opening a new file in write mode
+    dummy_file = open("dummy.txt", "w+")
+
+    # Read the original text file and write the content to the dummy file
+    with open(datPath) as textFile:
         lines = textFile.readlines()
     del lines[0]
-    new_file = open(datPath,"w+")
     for line in lines:
-        new_file.write(line)
-    new_file.close()
+        dummy_file.write(line)
+    dummy_file.close()
 
-    with open (datPath) as textFile:
-        for line in textFile:
+    # Open the dummy file and read the contents
+    with open("dummy.txt") as dummy_textFile:
+        for line in dummy_textFile:
             array1 = [item.strip() for item in line.split()]
             array.append(array1)            
     return array
