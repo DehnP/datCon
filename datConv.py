@@ -4,7 +4,7 @@ from matplotlib.figure import Figure
 import customtkinter as ctk
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg)
 import numpy as np
-from datfuncs2 import OpenTextFile, AddOnes, chordMult, prepend_line
+from datfuncs import OpenTextFile, AddOnes, chordMult, prepend_line
 from PIL import Image
 
 # TO DO ------->>> RESIZE WINDOW WHEN PLOTTING
