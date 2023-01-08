@@ -4,7 +4,7 @@ from matplotlib.figure import Figure
 import customtkinter as ctk
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg)
 import numpy as np
-from datfuncs import OpenTextFile, AddOnes, chordMult, prepend_line
+from datFuncs import OpenTextFile, AddOnes, chordMult, prepend_line
 from PIL import Image
 
 class App(ctk.CTk):

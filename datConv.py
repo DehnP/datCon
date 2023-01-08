@@ -4,7 +4,7 @@ from matplotlib.figure import Figure
 import customtkinter as ctk
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg)
 import numpy as np
-from datfuncs import OpenTextFile, AddOnes, chordMult, prepend_line
+from datFuncs import OpenTextFile, AddOnes, chordMult, prepend_line
 from PIL import Image
 
 # TO DO ------->>> RESIZE WINDOW WHEN PLOTTING
@@ -12,11 +12,12 @@ class App(ctk.CTk):
     def __init__(self):
         super().__init__()
 
+        # set appearance mode and default color theme
         ctk.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
         ctk.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
-        self.geometry(f"{345}x{360}")
         self.resizable(0,0)
         self.title(".dat Converter 2 (Updated v6)")
+        # initialize the window
         self.view1()
 
     def view1(self):
