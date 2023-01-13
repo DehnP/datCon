@@ -136,8 +136,6 @@ class App(ctk.CTk):
             var = prepend_line_to_file(savePath,'polyline=true')
             remove_decimal_zeros(savePath)
             print('File saved to: '+savePath)
-
-            
         else:
             print('')
 
