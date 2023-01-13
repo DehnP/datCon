@@ -1,71 +1,55 @@
 import numpy as np
 import os
 
-#==========Strip txt to array & Remove first line=========#
-# def OpenTextFile(datPath):
-#     array = []
-
-#     with open (datPath) as textFile:
-#         lines = textFile.readlines()
-#     del lines[0]
-#     new_file = open(datPath,"w+")
-#     for line in lines:
-#         new_file.write(line)
-#     new_file.close()
-
-#     with open (datPath) as textFile:
-#         for line in textFile:
-#             array1 = [item.strip() for item in line.split()]
-#             array.append(array1)            
-#     return array
-
-#==========Strip txt to array=========#
-def OpenTextFile(datPath):
+# Function to read in the data from the .txt files
+def strip_txt_to_array(file_path):
     array = []
-
-    # Create a dummy file by opening a new file in write mode
-    dummy_file = open("dummy.txt", "w+")
-
-    # Read the original text file and write the content to the dummy file
-    with open(datPath) as textFile:
-        lines = textFile.readlines()
+    with open(file_path) as text_file:
+        lines = text_file.readlines()
     del lines[0]
     for line in lines:
-        dummy_file.write(line)
-    dummy_file.close()
-
-    # Open the dummy file and read the contents
-    with open("dummy.txt") as dummy_textFile:
-        for line in dummy_textFile:
-            array1 = [item.strip() for item in line.split()]
-            array.append(array1)            
+        array1 = [item.strip() for item in line.split()]
+        array.append(array1)
     return array
 
-#==========Add ones to array=========#
-def AddOnes(array):
-    PP = np.asarray(array, dtype=np.float16)
-    z = np.ones((PP.shape[0],3))
-    z[:, 1:3] = PP
-    return z
+# Function to add a column of ones to the data (spaceclaim)
+def add_ones(array):
+    array = np.asarray(array, dtype=np.float16)
+    ones = np.ones((array.shape[0], 3))
+    ones[:, 1:3] = array
+    return ones
 
-#==========Multiply by chord length=========#
-def chordMult(CL,arr):
-    arr[:,1:3] *= CL
-    return arr
+# Function to multiply the data by the chord length
+def multiply_by_chord_length(chord_length, array):
+    array[:, 1:3] *= chord_length
+    return array
 
-#==========Add Polyline=true===============#
-def prepend_line(file_name, line):
-    """ Insert given string as a new line at the beginning of a file """
-    # define name of temporary dummy file
-    dummy_file = file_name + '.bak'
-    # open original file in read mode and dummy file in write mode
-    with open(file_name, 'r') as read_obj, open(dummy_file, 'w') as write_obj:
-        # Write given line to the dummy file
+# Function to write the data to a .txt file
+def prepend_line_to_file(file_path, line):
+    dummy_file = file_path + '.bak'
+    with open(file_path, 'r') as read_obj, open(dummy_file, 'w') as write_obj:
         write_obj.write(line + '\n')
-        # Read lines from original file one by one and append them to the dummy file
         for line in read_obj:
             write_obj.write(line)
-    # remove original file
-    os.remove(file_name)
-    # Rename dummy file as the original file
-    os.rename(dummy_file, file_name)
+    os.remove(file_path)
+    os.rename(dummy_file, file_path)
+
+#========JANK CODE TO REMOVE .000000 FROM END OF EACH LINE========
+
+def remove_decimal_zeros(savePath):
+# Specify the string to be deleted and the file path
+    string_to_delete = ".000000"
+
+    # Open the file in read mode and read the contents into a string
+    with open(savePath, "r") as f:
+        contents = f.read()
+
+    # Replace all instances of the string with an empty string
+    modified_contents = contents.replace(string_to_delete, "")
+
+    # Open the file in write mode and write the modified string to the file
+    with open(savePath, "w") as f:
+        f.write(modified_contents)
+
+    # Close the file
+    f.close()

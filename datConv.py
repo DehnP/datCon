@@ -4,7 +4,7 @@ from matplotlib.figure import Figure
 import customtkinter as ctk
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg)
 import numpy as np
-from datFuncs import OpenTextFile, AddOnes, chordMult, prepend_line
+from datFuncs import *
 from PIL import Image
 
 # TO DO ------->>> RESIZE WINDOW WHEN PLOTTING
@@ -98,9 +98,9 @@ class App(ctk.CTk):
 
     def loadButton(self):
         if self.Chord_Entry.get().isdigit():
-            array = OpenTextFile(self.File_Loc_Entry.get())
-            array = AddOnes(array)
-            array = chordMult(int(self.Chord_Entry.get()),array)
+            array = strip_txt_to_array(self.File_Loc_Entry.get())
+            array = add_ones(array)
+            array = multiply_by_chord_length(int(self.Chord_Entry.get()),array)
             global arr
             arr = array
         else:
@@ -131,27 +131,12 @@ class App(ctk.CTk):
 
     def saveButton(self):
         if len(self.Save_Loc_Entry.get()) > 0:
-            np.savetxt(self.Save_Loc_Entry.get()+'\\'+self.File_Name_Entry.get()+'.txt',arr,fmt='%1.6f',delimiter=',')
-            var = prepend_line(self.Save_Loc_Entry.get()+'\\'+self.File_Name_Entry.get()+'.txt','polyline=true')
+            savePath = (self.Save_Loc_Entry.get()+'\\'+self.File_Name_Entry.get()+'.txt')
+            np.savetxt(savePath,arr,fmt='%1.6f',delimiter=',')
+            var = prepend_line_to_file(savePath,'polyline=true')
+            remove_decimal_zeros(savePath)
+            print('File saved to: '+savePath)
 
-            #========JANK CODE TO REMOVE .000000 FROM END OF EACH LINE========
-            # Specify the string to be deleted and the file path
-            string_to_delete = ".000000"
-            file_path = (self.Save_Loc_Entry.get()+'\\'+self.File_Name_Entry.get()+'.txt')
-
-            # Open the file in read mode and read the contents into a string
-            with open(file_path, "r") as f:
-                contents = f.read()
-
-            # Replace all instances of the string with an empty string
-            modified_contents = contents.replace(string_to_delete, "")
-
-            # Open the file in write mode and write the modified string to the file
-            with open(file_path, "w") as f:
-                f.write(modified_contents)
-
-            # Close the file
-            f.close()
             
         else:
             print('')
