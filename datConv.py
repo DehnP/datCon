@@ -17,7 +17,7 @@ class App(ctk.CTk):
         ctk.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
         self.resizable(0,0)
         self.title("datConv")
-        self.iconbitmap("Assets/datCon.ico")
+        # self.iconbitmap("Assets/datCon.ico")
         # initialize the window
         self.view1()
 
@@ -78,7 +78,7 @@ class App(ctk.CTk):
         self.quitButton = ctk.CTkButton(self.f2,text='Quit',command = self.quitProgram)
         self.quitButton.grid(row=4,column=1,columnspan=3,sticky='nsew',pady=5)
 
-    #==========FUNCTIONS===========
+    #==========METHODS===========
     #==========PLOTVIEW===========
     def view2(view1):
         view1.f3 = tkinter.Frame(view1)
