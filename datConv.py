@@ -6,8 +6,8 @@ from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg)
 import numpy as np
 from datFuncs import *
 from PIL import Image
+import matplotlib as plt
 
-# TO DO ------->>> RESIZE WINDOW WHEN PLOTTING
 class App(ctk.CTk):
     def __init__(self):
         super().__init__()
