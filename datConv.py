@@ -17,7 +17,7 @@ class App(ctk.CTk):
         ctk.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
         self.resizable(0,0)
         self.title("datConv")
-        # self.iconbitmap("Assets/datCon.ico")
+        self.iconbitmap("Assets/datCon.ico")
         # initialize the window
         self.view1()
 
