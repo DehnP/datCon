@@ -1,11 +1,9 @@
 # datConv
-A tool for converting and plotting airfoil dat files using tkinter, matplotlib, and customtkinter.
+A simple, lightweight, GUI-driven program for converting seligformat dat files to a format readable by ANSYS Spaceclaim (& others (coming soon!))
 
 ## Features
 User-friendly GUI interface
-Batch conversion of multiple dat files
 Plotting of airfoil data
-Customizable appearance and color theme
 ## System Requirements
 Python 3.7 or later
 Tkinter, Matplotlib, customtkinter, numpy, and PIL libraries
