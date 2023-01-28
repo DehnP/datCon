@@ -3,3 +3,4 @@
 *.txt
 *.png
 __pycache__
+/Profiles/*

@@ -6,14 +6,12 @@ from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg)
 import numpy as np
 from datFuncs import *
 from PIL import Image
-import matplotlib as plt
 
 class App(ctk.CTk):
     def __init__(self):
         super().__init__()
-
         # set appearance mode and default color theme
-        ctk.set_appearance_mode("Light")  # Modes: "System" (standard), "Dark", "Light"
+        ctk.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
         ctk.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
         self.resizable(0,0)
         self.title("datConv")
@@ -22,16 +20,16 @@ class App(ctk.CTk):
         self.view1()
 
     def view1(self):
-
+        customFont = ('Arciform',12)
         #==========FRAMING===========
         self.f1 = ctk.CTkFrame(self)
         self.f1.grid(row=0,column=0,pady=10,padx=10)
         self.f2 = ctk.CTkFrame(self)
-        self.f2.grid(row=2,column=0,pady=10,padx=10)
+        self.f2.grid(row=1,column=0,pady=10,padx=10)
 
         #==========FRAME 1===========
         self.folder_icon = ctk.CTkImage(light_image=Image.open("Assets/Folder.png"))
-        self.File_Loc_Label = ctk.CTkLabel(self.f1,text='File Location')
+        self.File_Loc_Label = ctk.CTkLabel(self.f1,text='File Location',font=customFont)
         self.File_Loc_Label.grid(row=0,column=0,columnspan=3,sticky='nsew',pady=2)
 
         self.File_Loc_Entry = ctk.CTkEntry(self.f1,placeholder_text='C:\\..',width=300)
@@ -40,7 +38,7 @@ class App(ctk.CTk):
         self.File_Loc_Open = ctk.CTkButton(self.f1,text='',width=20,image=self.folder_icon,command=self.openFile)
         self.File_Loc_Open.grid(row=1,column=2,sticky='nsew',pady=2)
 
-        self.Chord_Label = ctk.CTkLabel(self.f1,text='Chord Length')
+        self.Chord_Label = ctk.CTkLabel(self.f1,text='Chord Length',font=customFont)
         self.Chord_Label.grid(row=2,column=0,sticky='nsew',pady=2)
 
         self.Chord_Entry = ctk.CTkEntry(self.f1,placeholder_text='160..')
@@ -79,14 +77,6 @@ class App(ctk.CTk):
         self.quitButton.grid(row=4,column=1,columnspan=3,sticky='nsew',pady=5)
 
     #==========METHODS===========
-    #==========PLOTVIEW===========
-    def view2(view1):
-        view1.f3 = tkinter.Frame(view1)
-        view1.f3.grid(row=1,column=0)
-
-        view1.label = ctk.CTkLabel(view1.f3,text='!!PLACEHOLDER!!',width=310,height=120)
-        view1.label.pack(pady=10,padx=10)
-
     def openFile(self):
         root = tkinter.Tk()
         root.withdraw() #use to hide tkinter window
@@ -108,15 +98,14 @@ class App(ctk.CTk):
 
     def plotButton(self):
         if 'arr' in globals():
-            self.view2
-            fig = Figure(figsize=(3.25,1.5),dpi=100)
+            fig = Figure(figsize=(6.5,3),dpi=100)
             fig.set_facecolor('xkcd:black')
             x = arr[:,1]
             y = arr[:,2]
             plot1 = fig.add_subplot(111)
             plot1.plot(x,y)
             canvas = FigureCanvasTkAgg(fig)
-            canvas.get_tk_widget().grid(row=1,column=0)
+            canvas.get_tk_widget().grid(row=0,column=1,rowspan=3)
 
         else:
             print('Load a file first..')
