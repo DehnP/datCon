@@ -1,7 +1,0 @@
-class profileSection():
-    def __init__(self,n,dr,twist,chord,profile):
-        self.n = n
-        self.dr = dr
-        self.twist = twist
-        self.chord = chord
-        self.profile = profile
