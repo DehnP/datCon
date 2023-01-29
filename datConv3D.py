@@ -63,7 +63,7 @@ class App(ctk.CTk):
         self.tabView = ctk.CTkTabview(self.masterFrame)
         self.tabView.pack(fill='both',expand=True,padx=5,pady=5,side='left')
         self.configTab = self.tabView.add("Config")
-        self.importTab = self.tabView.add("Import")
+        self.importTab = self.tabView.add("Import/Export")
 
         #=====================Config==================================================
         self.configFrame = ctk.CTkFrame(self.configTab)
@@ -372,12 +372,7 @@ class App(ctk.CTk):
         toolbar = NavigationToolbar2Tk(canvas, self.plotViewFrame)
         toolbar.update()
         canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
-
-
-
-
-
-        
+  
 if __name__ == "__main__":
   app = App()
   app.mainloop()
