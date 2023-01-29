@@ -5,6 +5,7 @@ import customtkinter as ctk
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg)
 import numpy as np
 from datFuncs3D import *
+from datConvClasses import *
 from PIL import Image
 import os
 
@@ -28,9 +29,6 @@ class App(ctk.CTk):
         ##=====================FRAMING==================================================
         self.masterFrame = ctk.CTkFrame(self)
         self.masterFrame.pack(pady=5,padx=5,fill='both',expand=True)
-
-        # self.leftFrame = ctk.CTkFrame(self.masterFrame) ##OBSOLETE##
-        # self.leftFrame.pack(side='left',fill='both',expand=True,padx=5,pady=5)
 
         self.rightFrame = ctk.CTkFrame(self.masterFrame)
         self.rightFrame.pack(side='right',fill='both',expand=True,padx=5,pady=5)
@@ -99,17 +97,15 @@ class App(ctk.CTk):
         self.profileSelectLabel.pack(side='left',padx=5,pady=5)
 
         # list of profile txt files in the profile folder
-        self.profileList = []
-        for file in os.listdir("profiles"):
-            if file.endswith(".txt"):
-                self.profileList.append(file.replace(".txt",""))
+        self.listProfiles()
+
 
         self.profileSelectOption = ctk.CTkOptionMenu(self.profileConfigFrame,values=self.profileList,font=textFont,width=55)
         self.profileSelectOption.pack(side='left',padx=5,pady=5)
         self.profileSelectOption.set("")
 
         # profile save button
-        self.profileSaveButton = ctk.CTkButton(self.profileConfigFrame,text="Save",font=textFont,command=self.save_profile_config_event)
+        self.profileSaveButton = ctk.CTkButton(self.profileConfigFrame,text="Save",font=textFont,command=self.save_section_config_event)
         self.profileSaveButton.pack(side='right',padx=5,pady=5)
 
 
@@ -162,8 +158,8 @@ class App(ctk.CTk):
         # update the options in the profile select option menu
         self.sectionSelectOption.configure(values=options)
 
-    def save_profile_config_event(self):
-        # save the respective profile
+    def save_section_config_event(self):
+        # Save configuration of section
         print("save_profile_event")
 
     def load_profile_event(self):
@@ -192,7 +188,12 @@ class App(ctk.CTk):
             savePath = ("Profiles/"+self.File_Name_Entry.get()+".txt")
             np.savetxt(savePath, array,fmt='%1.6f',delimiter=",")
 
-       
+    def listProfiles(self):
+        # list all profiles in the profile folder
+        self.profileList = []
+        for file in os.listdir("Profiles"):
+            if file.endswith(".txt"):
+                self.profileList.append(file.replace(".txt",""))
 
 
         
