@@ -7,7 +7,7 @@ from graph import *
 from txt_logic import *
 
 
-def main_view(App, current_blade):
+def main_view(App):
     titles_font = ctk.CTkFont(family="Arciform", size=20)
     text_font = ctk.CTkFont(family="Arciform", size=12)
     # =====================FRAMING==================================================
@@ -132,7 +132,7 @@ def main_view(App, current_blade):
         fill='x', expand=True, padx=5, pady=5, anchor='n')
     # plot Blade Button
     App.plot_blade_button = ctk.CTkButton(
-        App.plot_blade_frame, text="Plot Blade", font=text_font, command=lambda: plot_blade_event(App.current_blade, App.master_frame, App.plot_view_frame))
+        App.plot_blade_frame, text="Plot Blade", font=text_font, command=lambda: plot_blade_event(App.current_blade, App.right_frame, App.plot_view_frame))
     App.plot_blade_button.pack(side='right', padx=5, pady=5)
 
     # load Blade Frame
@@ -141,69 +141,74 @@ def main_view(App, current_blade):
         fill='x', expand=True, padx=5, pady=5, anchor='n')
     # load Blade Button
     App.load_blade_button = ctk.CTkButton(
-        App.load_blade_frame, text="Load Blade", font=text_font, command=lambda: load_blade_event(current_blade))
+        App.load_blade_frame, text="Load Blade", font=text_font, command=lambda: load_blade_event(App))
     App.load_blade_button.pack(side='right', padx=5, pady=5)
+
+    # print blade button
+    App.print_blade_button = ctk.CTkButton(
+        App.load_blade_frame, text="Print Blade", font=text_font, command=lambda: print_blade_event(App.current_blade))
+    App.print_blade_button.pack(side='right', padx=5, pady=5)
 
     # =====================Save/Load==================================================
     App.save_load_frame = ctk.CTkFrame(App.import_tab)
     App.save_load_frame.pack(fill='both', expand=True, padx=5, pady=5)
 
     # Save/Load Widgets
-    App.save_load_frame = ctk.CTkFrame(App.save_load_frame)
-    App.save_load_frame.pack(fill='both', expand=True, padx=5, pady=5)
+    App.nested_save_frame = ctk.CTkFrame(App.save_load_frame)
+    App.nested_save_frame.pack(fill='both', expand=True, padx=5, pady=5)
 
     App.folder_icon = ctk.CTkImage(
         light_image=Image.open("Assets/Folder.png"))
     App.file_loc_label = ctk.CTkLabel(
-        App.save_load_frame, text='Import .dat File Location:')
+        App.nested_save_frame, text='Import .dat File Location:')
     App.file_loc_label.grid(
         row=0, column=0, columnspan=3, sticky='nsew', pady=2)
 
     App.file_loc_entry = ctk.CTkEntry(
-        App.save_load_frame, placeholder_text='C:\\..', width=300)
+        App.nested_save_frame, placeholder_text='C:\\..', width=300)
     App.file_loc_entry.grid(
         row=1, column=0, sticky='nsew', pady=2, columnspan=2)
 
     App.file_loc_open = ctk.CTkButton(
-        App.save_load_frame, text='', width=20, image=App.folder_icon, command=open_file_location_event)
+        App.nested_save_frame, text='', width=20, image=App.folder_icon, command=lambda: open_file_location_event(App.file_loc_entry))
     App.file_loc_open.grid(row=1, column=2, sticky='nsew', pady=2)
 
     App.file_name_label = ctk.CTkLabel(
-        App.save_load_frame, text='File Name')
+        App.nested_save_frame, text='File Name')
     App.file_name_label.grid(row=2, column=0, sticky='nsew', pady=2)
 
-    App.file_name_entry = ctk.CTkEntry(
-        App.save_load_frame, placeholder_text='NACAXXXX..')
-    App.file_name_entry.grid(row=3, column=0, sticky='nsew', pady=2)
+    App.import_name_entry = ctk.CTkEntry(
+        App.nested_save_frame, placeholder_text='NACAXXXX..')
+    App.import_name_entry.grid(row=3, column=0, sticky='nsew', pady=2)
 
-    App.file_save = ctk.CTkButton(
-        App.save_load_frame, text='Save', width=50, command=save_profile_event)
-    App.file_save.grid(row=3, column=1, columnspan=3, sticky='nsew')
+    App.import_save = ctk.CTkButton(
+        App.nested_save_frame, text='Save', width=50, command=lambda: save_profile_event(App.import_name_entry, App.file_loc_entry))
+    App.import_save.grid(row=3, column=1, columnspan=3, sticky='nsew')
 
     App.save_loc_label = ctk.CTkLabel(
-        App.save_load_frame, text='Export SC compatible Save Location:')
+        App.nested_save_frame, text='Export SC compatible Save Location:')
     App.save_loc_label.grid(
         row=4, column=0, columnspan=3, sticky='nsew', pady=2)
 
     App.save_loc_entry = ctk.CTkEntry(
-        App.save_load_frame, placeholder_text='D:\\..', width=300)
+        App.nested_save_frame, placeholder_text='D:\\..', width=300)
     App.save_loc_entry.grid(
         row=5, column=0, sticky='nsew', pady=2, columnspan=2)
 
     App.save_loc_open = ctk.CTkButton(
-        App.save_load_frame, text='', width=20, image=App.folder_icon, command=open_save_location_event)
+        App.nested_save_frame, text='', width=20, image=App.folder_icon, command=lambda: open_save_location_event(App.save_loc_entry))
     App.save_loc_open.grid(row=5, column=2, sticky='nsew', pady=2)
 
     App.file_name_label = ctk.CTkLabel(
-        App.save_load_frame, text='File Name')
+        App.nested_save_frame, text='File Name')
     App.file_name_label.grid(row=6, column=0, sticky='nsew', pady=2)
 
-    App.file_name_entry = ctk.CTkEntry(
-        App.save_load_frame, placeholder_text='NACAXXXX..')
-    App.file_name_entry.grid(row=7, column=0, sticky='nsew', pady=2)
+    App.export_name_entry = ctk.CTkEntry(
+        App.nested_save_frame, placeholder_text='NACAXXXX..')
+    App.export_name_entry.grid(row=7, column=0, sticky='nsew', pady=2)
 
     App.file_save = ctk.CTkButton(
-        App.save_load_frame, text='Save', width=50, command=export_curves_event)
+        App.nested_save_frame, text='Save', width=50, command=lambda: export_curves_event(App.current_blade, App.save_loc_entry, App.export_name_entry))
     App.file_save.grid(row=7, column=1, columnspan=3, sticky='nsew')
 
     # =====================rightFrame==================================================

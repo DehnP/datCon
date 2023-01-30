@@ -14,25 +14,24 @@ import matplotlib
 matplotlib.use('TkAgg')
 
 
-def plot_blade_event(current_blade: Blade, master_frame, plot_view_frame) -> None:
+def plot_blade_event(current_blade: Blade, right_frame, plot_view_frame) -> None:
     # plot blade
     print("plot_blade_event")
+    print(current_blade.sections)
     # concatenate all sections
     blade_coords = np.array([])
-    for Section in current_blade.sections:
+    for section in current_blade.sections:
         if blade_coords.size == 0:
-            blade_coords = Section.coords
-            print('----test----')
-            print(blade_coords)
+            blade_coords = section.coords
         else:
             blade_coords = np.concatenate(
-                (blade_coords, Section.coords), axis=0)
+                (blade_coords, section.coords), axis=0)
 
     print(blade_coords)
     # plot 3d blade on plotView canvas
     # clear canvas
     plot_view_frame.destroy()
-    plot_view_frame = ctk.CTkFrame(master_frame)
+    plot_view_frame = ctk.CTkFrame(right_frame)
     plot_view_frame.pack(fill='both', expand=True, padx=10, pady=10)
     # plot
     fig = plt.figure()

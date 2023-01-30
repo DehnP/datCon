@@ -20,8 +20,10 @@ def open_file_location_event(file_loc_entry) -> None:
         file_loc_entry.insert(0, tempdir)
 
 
-def save_profile_event(file_loc_entry, file_name_entry) -> None:
+def save_profile_event(file_name_entry, file_loc_entry) -> None:
     # save profile to /Profiles
+    print(file_loc_entry.get())
+    print(file_name_entry.get())
     if len(file_name_entry.get()) == 0:
         print("No File Name")
         return
@@ -31,7 +33,7 @@ def save_profile_event(file_loc_entry, file_name_entry) -> None:
         np.savetxt(savePath, array, fmt='%1.6f', delimiter=",")
 
 
-def load_blade_event(current_blade: Blade) -> Blade:
+def load_blade_event(App):
     # load blade from file
     print("load_blade_event")
     root = tkinter.Tk()
@@ -42,7 +44,13 @@ def load_blade_event(current_blade: Blade) -> Blade:
         with open(tempdir, 'rb') as f:
             current_blade = pickle.load(f)
     print(current_blade.sections[0].coords)
-    return current_blade
+    App.current_blade = current_blade
+
+
+def print_blade_event(current_blade: Blade) -> None:
+    # print blade to console
+    print("print_blade_event")
+    print(current_blade.sections)
 
 
 def open_save_location_event(save_loc_entry) -> None:

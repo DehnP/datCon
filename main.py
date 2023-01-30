@@ -18,7 +18,7 @@ class App(ctk.CTk):
         # initialize an empty blade object
         self.current_blade = Blade()
         # initialize the window
-        main_view(self, self.current_blade)
+        main_view(self)
 
 
 if __name__ == "__main__":
