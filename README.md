@@ -1,18 +1,12 @@
-<style>
-  .center {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-</style>
-
-# <img src="src/datCon/Assets/datCon.svg" class="center">
+<p align="center">
+ <img src="src/datCon/Assets/datCon.svg" class="center">
+</p>
 A simple, lightweight, GUI-driven program for converting seligformat dat files to a format readable by ANSYS Spaceclaim (& others (coming soon!))
 
 ## Features
-User-friendly GUI interface
-Plotting of aerofoil data
-Conversion of seligformat dat files to a format readable by ANSYS Spaceclaim
+- User-friendly GUI interface
+- Plotting of aerofoil data
+- Conversion of seligformat dat files to a format readable by ANSYS Spaceclaim
 
 ## System Requirements
 ### Using pip
@@ -40,4 +34,4 @@ Windows 10 or later
 For any issues or support requests, please open an issue on the GitHub page or contact myself.
 
 ## Disclaimer
-datConv is an independent tool and is not affiliated with any other software. Use at your own risk.
+datCon is an independent tool and is not affiliated with any other software. Use at your own risk.
