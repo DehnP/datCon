@@ -1,9 +1,9 @@
-# <img src="src/datCon/Assets/datCon.svg" width='200' height='200'>
+# <img src="src/datCon/Assets/datCon.svg">
 A simple, lightweight, GUI-driven program for converting seligformat dat files to a format readable by ANSYS Spaceclaim (& others (coming soon!))
 
 ## Features
 User-friendly GUI interface
-Plotting of airfoil data
+Plotting of aerofoil data
 Conversion of seligformat dat files to a format readable by ANSYS Spaceclaim
 
 ## System Requirements
@@ -23,9 +23,8 @@ Windows 10 or later
 - Extract the files to a directory
 - Run the executable: 'main.exe'
 ## Usage
-- Run the script using python datConv.py
-- Use the "File Location" button to select one or more dat files for conversion
-- Input the chord length of the airfoil
+- Import selig format dat files using the "Import" button
+- Input the chord length of the aerofoil
 - Click on the "Load" button to load the data and "Plot" to plot the data
 - Use the "Save Location" button to select a directory to save the converted files
 
