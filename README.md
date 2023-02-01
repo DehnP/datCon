@@ -4,6 +4,8 @@ A simple, lightweight, GUI-driven program for converting seligformat dat files t
 ## Features
 User-friendly GUI interface
 Plotting of airfoil data
+Conversion of seligformat dat files to a format readable by ANSYS Spaceclaim
+
 ## System Requirements
 ### Using pip
 Python 3.7 or later
