@@ -1,4 +1,4 @@
-# datConv <img src="src/datCon/Assets/datCon.svg">
+# <img src="src/datCon/Assets/datCon.svg" width='35' height='35'>
 A simple, lightweight, GUI-driven program for converting seligformat dat files to a format readable by ANSYS Spaceclaim (& others (coming soon!))
 
 ## Features
