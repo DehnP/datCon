@@ -132,7 +132,7 @@ def main_view(App):
         fill='x', expand=True, padx=5, pady=5, anchor='n')
     # plot Blade Button
     App.plot_blade_button = ctk.CTkButton(
-        App.plot_blade_frame, text="Plot Blade", font=text_font, command=lambda: plot_blade_event(App.current_blade, App.right_frame, App.plot_view_frame))
+        App.plot_blade_frame, text="Plot Blade", font=text_font, command=lambda: plot_blade_event(App.current_blade, App.right_frame))
     App.plot_blade_button.pack(side='right', padx=5, pady=5)
 
     # load Blade Frame
@@ -212,9 +212,3 @@ def main_view(App):
     App.file_save.grid(row=7, column=1, columnspan=3, sticky='nsew')
 
     # =====================rightFrame==================================================
-    App.plot_view_label = ctk.CTkLabel(
-        App.right_frame, text="Plot View", font=titles_font)
-    App.plot_view_label.pack(side='top', padx=5, pady=5)
-
-    App.plot_view_frame = ctk.CTkFrame(App.right_frame)
-    App.plot_view_frame.pack(fill='both', expand=True, padx=10, pady=10)

@@ -1,18 +1,8 @@
 import numpy as np
-import os
-import pandas as pd
 
 
 def strip_dat_to_array(file_path) -> np.array:
-    array = []
-    with open(file_path) as text_file:
-        lines = text_file.readlines()
-    del lines[0]  # remove header
-    for line in lines:
-        array1 = [item.strip() for item in line.split()]
-        array.append(array1)
-    array = np.asarray(array, dtype=np.float16)
-    return array
+    return np.genfromtxt(file_path, skip_header=1, dtype=np.float16)
 
 
 def strip_profile_to_array(file_path) -> np.array:
@@ -20,20 +10,15 @@ def strip_profile_to_array(file_path) -> np.array:
     return array
 
 
-def scale_profile(profile, scale_factor: float) -> np.array:
+def calculate_section_coords(profile, scale_factor: float, angle: float, dr: float, n: int) -> np.array:
     profile = profile * scale_factor
-    return profile
 
-
-def rotate_profile(profile, angle: float) -> np.array:
     theta = np.radians(angle)
     c, s = np.cos(theta), np.sin(theta)
     R = np.array(((c, -s), (s, c)))
-    profile = np.dot(R, profile.T).T
-    return profile
+    profile = np.dot(profile, R.T)
 
-
-def add_displacement_column(array, n, dr) -> np.array:
     radial_dist = dr * n
-    array = np.insert(array, 0, radial_dist, axis=1)
-    return array
+    profile = np.insert(profile, 0, radial_dist, axis=1)
+
+    return profile
