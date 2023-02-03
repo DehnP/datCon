@@ -1,6 +1,5 @@
 import customtkinter as ctk
-import tkinter as tk
-from PIL import Image, ImageTk
+from PIL import Image
 from config import *
 from import_export import *
 from graph import *
@@ -17,16 +16,16 @@ def main_view(App):
     App.right_frame = ctk.CTkFrame(App.master_frame)
     App.right_frame.pack(side='right', fill='both',
                          expand=True, padx=5, pady=5)
-    # ===============================================================================
+    # ==============================================================================
 
-    # =====================leftFrame==================================================
+    # =====================leftFrame================================================
     App.tab_view = ctk.CTkTabview(App.master_frame)
     App.tab_view.pack(fill='both', expand=True,
                       padx=5, pady=5, side='left')
     App.config_tab = App.tab_view.add("Config")
     App.import_tab = App.tab_view.add("Import/Export")
-
-    # =====================Config==================================================
+    # ==============================================================================
+    # =====================Config===================================================
     App.config_frame = ctk.CTkFrame(App.config_tab)
     App.config_frame.pack(fill='both', expand=True, padx=5, pady=5)
 
@@ -132,7 +131,7 @@ def main_view(App):
         fill='x', expand=True, padx=5, pady=5, anchor='n')
     # plot Blade Button
     App.plot_blade_button = ctk.CTkButton(
-        App.plot_blade_frame, text="Plot Blade", font=text_font, command=lambda: plot_blade_event(App.current_blade, App.right_frame))
+        App.plot_blade_frame, text="Plot Blade", font=text_font, command=lambda: plot_blade_event(App.current_blade, App.plot_frame))
     App.plot_blade_button.pack(side='right', padx=5, pady=5)
 
     # load Blade Frame
@@ -212,3 +211,8 @@ def main_view(App):
     App.file_save.grid(row=7, column=1, columnspan=3, sticky='nsew')
 
     # =====================rightFrame==================================================
+    App.plot_label = ctk.CTkLabel(
+        App.right_frame, text='Plot View', font=titles_font)
+    App.plot_label.pack(side='top', anchor='n', padx=5, pady=5)
+    App.plot_frame = ctk.CTkFrame(App.right_frame)
+    App.plot_frame.pack(fill='both', expand=True, padx=5, pady=5)

@@ -20,3 +20,8 @@ class DatConApp(ctk.CTk):
 if __name__ == "__main__":
     app = DatConApp()
     app.mainloop()
+
+
+def Exit():
+    app.destroy()
+    exit()
