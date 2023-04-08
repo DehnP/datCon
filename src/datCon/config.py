@@ -1,5 +1,6 @@
 import array_logic
 import classes
+from graph import plot_blade_event
 
 
 def change_number_of_profile_event(section_quantity_entry, section_select_option) -> None:
